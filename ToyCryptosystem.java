@@ -7,22 +7,19 @@ import java.util.Scanner;
 
 /**
  * This program implements a toy symmetric cryptosystem.
- * I am an undergraduate student, but I did the assignment for graduates (using words vs characters).
- * I changed the generateKey method to return a short value, because the guidelines specified
- * a 16-bit key.
+ * Includes encryption, decryption, and bruteforce attack methods.
  * @author Leticia Garcia-Sainz
  * @date 2-11-18
  */
 public class ToyCryptosystem {
 
-	private static String msg;
+    private static String msg;
     private static String msgE;
     private static String msgD;
     private static short key;
     private static String result = "";
     
     public static void main(String[] args){
-        //TODO: You can only call methods in main method
         key = generateKey();
         msg = generateMsg();
         msgE = encryption(key,msg);
@@ -165,17 +162,17 @@ public class ToyCryptosystem {
         }
     	
 
-    	// set some number of attempts for the purpose of this assignment
+    	// Set some number of attempts for the purpose of this assignment
     	int attempts = 1;
     	boolean isValid = false;
     	while (isValid == false && attempts < 5) {
     		
-    		// generate new key and decrypt message
+    		// Generate new key and decrypt message
     		generateKey();
     		decryption(key, msgE);
     		String[] wordss = msgD.split(" ");
     		
-    		// check word in decrypted message against dictionary
+    		// Check word in decrypted message against dictionary
     		for (int i = 0; i < wordss.length; i++) {
         		inner:
         		for (int j = 0; j < dictionary.size()-1; j++) {
@@ -187,12 +184,12 @@ public class ToyCryptosystem {
         		}   
         	}
     		
-    		// if we matched the message to the words in our dictionary print success
+    		// If we matched the message to the words in our dictionary print success
     		if (isValid == true) {
     			System.out.println("Bruteforce Successful. " + "Decrypted: " + msgD);
     		}
     		else {
-    			// if we didn't find any matches then we will attempt again with new key
+    			// If we didn't find any matches then we will attempt again with new key
         		System.out.println("Attempt " + attempts + " failed." );
         		attempts++;
         		key = generateKey();
